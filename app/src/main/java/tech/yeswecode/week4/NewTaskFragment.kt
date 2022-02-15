@@ -10,10 +10,16 @@ import android.widget.Toast
 import tech.yeswecode.week4.databinding.FragmentNewTaskBinding
 import java.lang.NullPointerException
 
+interface OnNewTaskListener {
+    fun onNewTask(task: String)
+}
+
 class NewTaskFragment : Fragment() {
 
     private var _binding: FragmentNewTaskBinding? = null
     private val binding get() = _binding!!
+
+    var listener: OnNewTaskListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +32,10 @@ class NewTaskFragment : Fragment() {
         binding.addBtn.setOnClickListener {
             val text = binding.taskET.text.toString()
             Log.d("NewTaskFragment", text)
+
+            listener?.let {
+                it.onNewTask(text)
+            }
         }
 
         return view

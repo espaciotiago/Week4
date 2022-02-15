@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
         newTaskFragment = NewTaskFragment.newInstance()
         taskListFragment = TaskListFragment.newInstance()
 
+        newTaskFragment.listener = taskListFragment
+
         binding.navigator.setOnItemSelectedListener {
             if(it.itemId == R.id.newItem) {
                 showFragment(newTaskFragment)
