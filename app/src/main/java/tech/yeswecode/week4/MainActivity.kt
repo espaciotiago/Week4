@@ -3,25 +3,26 @@ package tech.yeswecode.week4
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import tech.yeswecode.week4.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var navigator: BottomNavigationView
 
     private lateinit var newTaskFragment: NewTaskFragment
 
     private lateinit var taskListFragment: TaskListFragment
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         newTaskFragment = NewTaskFragment.newInstance()
         taskListFragment = TaskListFragment.newInstance()
 
-        navigator = findViewById(R.id.navigator)
-        navigator.setOnItemSelectedListener {
+        binding.navigator.setOnItemSelectedListener {
             if(it.itemId == R.id.newItem) {
                 showFragment(newTaskFragment)
             } else if(it.itemId == R.id.listItem) {
